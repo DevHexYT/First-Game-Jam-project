@@ -23,8 +23,7 @@ public class CollectableScript : MonoBehaviour {
 	}
 
 	private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-		closestCollectable = null;
-		isItemCollected = false;
+		ResetCollectionState();
 	}
 
 	public void CheckClosestCollectable() {
@@ -62,7 +61,7 @@ public class CollectableScript : MonoBehaviour {
 		if (collected) {
 			transform.position = collectTransform.position;
 			transform.rotation = collectTransform.rotation;
-		}
+		} else ResetCollectionState();
 	}
 
 	public void ResetCollectionState() {
