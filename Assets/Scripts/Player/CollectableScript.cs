@@ -61,7 +61,7 @@ public class CollectableScript : MonoBehaviour {
 		if (collected) {
 			transform.position = collectTransform.position;
 			transform.rotation = collectTransform.rotation;
-		} else ResetCollectionState();
+		} else if(!isItemCollected && !collected) ResetCollectionState();
 	}
 
 	public void ResetCollectionState() {
