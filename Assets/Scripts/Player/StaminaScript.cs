@@ -4,18 +4,17 @@ using UnityEngine.UI;
 public class StaminaScript : UIBarsScript {
 	public static StaminaScript instance;
 
-	private GameObject fill;
+	[HideInInspector] private GameObject fill;
 	public float curStamina;
 	public float maxStamina;
 	public float startingValue;
-	public GameObject canvas;
+	public GameObject staminaCanvas;
 
 	private void Awake() {
 		instance = this;
 		curStamina = startingValue;
 		
 		SetMaxValue(maxStamina,startingValue);
-		slider = canvas.transform.Find("StaminaBar").gameObject.GetComponent<Slider>();
 		fill = slider.transform.Find("Fill").gameObject;
 	}
 	private void Update() {

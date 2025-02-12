@@ -36,22 +36,22 @@ public class PlayerScript : MonoBehaviour{
 
 		if (Input.GetKeyDown(KeyCode.Escape) && !esc) {
 			resumeCanvas.SetActive(true);
-			staminaScript.staminaBar.SetActive(false);
+			staminaScript.staminaCanvas.SetActive(false);
 			Time.timeScale = 0f;
 			esc = true;
 		} else if (Input.GetKeyDown(KeyCode.Escape) && esc) {
 			resumeCanvas.SetActive(false);
-			staminaScript.staminaBar.SetActive(true);
+			staminaScript.staminaCanvas.SetActive(true);
 			Time.timeScale = 1f;
 			esc = false;
 		}
 
 		Volume volume = slowMoPost.GetComponent<Volume>();
 		float[] targetIntensities = new float[4];
-		targetIntensities[0] = slowMoPost ? 0.4f : 0f;
-		targetIntensities[1] = slowMoPost ? 0.25f : 0f;
-		targetIntensities[2] = slowMoPost ? -30 : 0f;
-		targetIntensities[3] = slowMoPost ? 20f : 0f;
+		targetIntensities[0] = slowMotion ? 0.4f : 0f;
+		targetIntensities[1] = slowMotion ? 0.25f : 0f;
+		targetIntensities[2] = slowMotion ? -30 : 0f;
+		targetIntensities[3] = slowMotion ? 20f : 0f;
 		float lerpSpeed = 5f * Time.deltaTime;
 
 		if (volume.profile.TryGet(out chromatic))

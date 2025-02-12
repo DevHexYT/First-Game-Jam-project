@@ -766,7 +766,11 @@ PrefabInstance:
     - target: {fileID: 6141551966330018619, guid: 198a8683a52d095409e43c7542fe2278, type: 3}
       propertyPath: slider
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1715309706}
+    - target: {fileID: 6141551966330018619, guid: 198a8683a52d095409e43c7542fe2278, type: 3}
+      propertyPath: staminaCanvas
+      value: 
+      objectReference: {fileID: 1479278400}
     - target: {fileID: 6141551966330018619, guid: 198a8683a52d095409e43c7542fe2278, type: 3}
       propertyPath: startingValue
       value: 0
@@ -1119,6 +1123,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1715309706 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1450484209765278496, guid: 9467e19270958914190943efab4d8589, type: 3}
+  m_PrefabInstance: {fileID: 172343133354134346}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1795750628 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8113172649368195698, guid: 198a8683a52d095409e43c7542fe2278, type: 3}
