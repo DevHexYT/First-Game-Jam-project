@@ -33,36 +33,36 @@ public class PlayerScript : MonoBehaviour{
 		PlayerMovement(rb, collect, SPEED);
 		SlowmotionEffect(0.3f, ref slowMotion, staminaScript.curStamina);
 		StaminaBarHandle(slowMotion, ref staminaScript.curStamina, 50f);
-		cameraPos();
 
 		if (Input.GetKeyDown(KeyCode.Escape) && !esc) {
 			resumeCanvas.SetActive(true);
-			staminaScript.canvas.SetActive(false);
+			staminaScript.staminaBar.SetActive(false);
 			Time.timeScale = 0f;
 			esc = true;
 		} else if (Input.GetKeyDown(KeyCode.Escape) && esc) {
 			resumeCanvas.SetActive(false);
-			staminaScript.canvas.SetActive(true);
+			staminaScript.staminaBar.SetActive(true);
 			Time.timeScale = 1f;
 			esc = false;
 		}
 
 		Volume volume = slowMoPost.GetComponent<Volume>();
-		float targetIntensity1 = slowMotion ? 0.4f : 0f;
-		float targetIntensity2 = slowMotion ? 0.25f : 0f;
-		float targetIntensity3 = slowMotion ? -30f : 0f;
-		float targetIntensity4 = slowMotion ? 20f : 0f;
+		float[] targetIntensities = new float[4];
+		targetIntensities[0] = slowMoPost ? 0.4f : 0f;
+		targetIntensities[1] = slowMoPost ? 0.25f : 0f;
+		targetIntensities[2] = slowMoPost ? -30 : 0f;
+		targetIntensities[3] = slowMoPost ? 20f : 0f;
 		float lerpSpeed = 5f * Time.deltaTime;
 
 		if (volume.profile.TryGet(out chromatic))
-			chromatic.intensity.value = Mathf.Lerp(chromatic.intensity.value, targetIntensity1, lerpSpeed);
+			chromatic.intensity.value = Mathf.Lerp(chromatic.intensity.value, targetIntensities[0], lerpSpeed);
 
 		if (volume.profile.TryGet(out lensDistortion))
-			lensDistortion.intensity.value = Mathf.Lerp(lensDistortion.intensity.value, targetIntensity2, lerpSpeed);
+			lensDistortion.intensity.value = Mathf.Lerp(lensDistortion.intensity.value, targetIntensities[1], lerpSpeed);
 
 		if (volume.profile.TryGet(out whiteBalance)) {
-			whiteBalance.temperature.value = Mathf.Lerp(whiteBalance.temperature.value, targetIntensity3, lerpSpeed);
-			whiteBalance.tint.value = Mathf.Lerp(whiteBalance.tint.value, targetIntensity4, lerpSpeed);
+			whiteBalance.temperature.value = Mathf.Lerp(whiteBalance.temperature.value, targetIntensities[2], lerpSpeed);
+			whiteBalance.tint.value = Mathf.Lerp(whiteBalance.tint.value, targetIntensities[3], lerpSpeed);
 
 		}
 	}
@@ -115,14 +115,5 @@ public class PlayerScript : MonoBehaviour{
 			loseLevel = true;
 		}
 	}
-	#endregion
-
-	#region CameraMovement
-	private void cameraPos() {
-		Vector3 newCamPos = new Vector3(transform.position.x, transform.position.y, -10);
-
-		Camera.main.transform.position = newCamPos;
-	}
-
 	#endregion
 }
