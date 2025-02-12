@@ -27,7 +27,7 @@ public class EnemyScript : MonoBehaviour {
 
 		rb = GetComponent<Rigidbody2D>();
 
-		GameObject.Find("GameMannge").GetComponent<GameManngeScript>().AddEnemy();
+		GameObject.Find("UIMannge").GetComponent<GameManngeScript>().AddEnemy();
 	}
 
 	// Update is called once per frame
@@ -53,7 +53,7 @@ public class EnemyScript : MonoBehaviour {
 	private void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.CompareTag("PlayerBullet")) {
 			StaminaScript staminaScript = player.GetComponent<StaminaScript>();
-			GameObject.Find("GameMannge").GetComponent<GameManngeScript>().RemoveEnemy();
+			GameObject.Find("UIMannge").GetComponent<GameManngeScript>().RemoveEnemy();
 			if (staminaScript) {
 				staminaScript.curStamina += 25f;
 				staminaScript.SetValue(staminaScript.curStamina);
@@ -63,7 +63,7 @@ public class EnemyScript : MonoBehaviour {
 			newDeathParticle.Play();
 			Destroy(newDeathParticle,1.5f);
 			Destroy(other.gameObject);
-			Debug.Log(GameObject.Find("GameMannge").GetComponent<GameManngeScript>().enemysCount);
+			Debug.Log(GameObject.Find("UIMannge").GetComponent<GameManngeScript>().enemysCount);
 		}
 	}
 }
