@@ -5,25 +5,26 @@ using UnityEngine.Rendering.Universal;
 
 public class PlayerScript : MonoBehaviour{
 
-	public Rigidbody2D rb;
-	public GameObject collect;
+	[HideInInspector] public bool slowMotion = false;
+	[HideInInspector] public bool loseLevel = false;
+	[HideInInspector] public bool winLevel = false;
+	[HideInInspector] public bool esc = false;
+	[HideInInspector] public StaminaScript staminaScript;
+	[HideInInspector] public Rigidbody2D rb;
 	public const float SPEED = 4.5F;
-	
-	public bool slowMotion = false;
+
+	[Header("Game Objects")]
+	public GameObject collect;
 	public GameObject slowMoPost;
+	public GameObject resumeCanvas;
+	
 	private ChromaticAberration chromatic;
 	private LensDistortion lensDistortion;
 	private WhiteBalance whiteBalance;
-	public StaminaScript staminaScript;
-	
-	public GameObject resumeCanvas;
-	public bool esc = false;
-
-	public bool winLevel = false;
-	public bool loseLevel = false;
 	
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	void Start() {
+		FindFirstObjectByType<AudioManager>().Play("Theme");
 		staminaScript = GetComponent<StaminaScript>();
 		rb = GetComponent<Rigidbody2D>();
 	}
@@ -33,38 +34,8 @@ public class PlayerScript : MonoBehaviour{
 		PlayerMovement(rb, collect, SPEED);
 		SlowmotionEffect(0.3f, ref slowMotion, staminaScript.curStamina);
 		StaminaBarHandle(slowMotion, ref staminaScript.curStamina, 50f);
-
-		if (Input.GetKeyDown(KeyCode.Escape) && !esc) {
-			resumeCanvas.SetActive(true);
-			staminaScript.staminaCanvas.SetActive(false);
-			Time.timeScale = 0f;
-			esc = true;
-		} else if (Input.GetKeyDown(KeyCode.Escape) && esc) {
-			resumeCanvas.SetActive(false);
-			staminaScript.staminaCanvas.SetActive(true);
-			Time.timeScale = 1f;
-			esc = false;
-		}
-
-		Volume volume = slowMoPost.GetComponent<Volume>();
-		float[] targetIntensities = new float[4];
-		targetIntensities[0] = slowMotion ? 0.4f : 0f;
-		targetIntensities[1] = slowMotion ? 0.25f : 0f;
-		targetIntensities[2] = slowMotion ? -30 : 0f;
-		targetIntensities[3] = slowMotion ? 20f : 0f;
-		float lerpSpeed = 5f * Time.deltaTime;
-
-		if (volume.profile.TryGet(out chromatic))
-			chromatic.intensity.value = Mathf.Lerp(chromatic.intensity.value, targetIntensities[0], lerpSpeed);
-
-		if (volume.profile.TryGet(out lensDistortion))
-			lensDistortion.intensity.value = Mathf.Lerp(lensDistortion.intensity.value, targetIntensities[1], lerpSpeed);
-
-		if (volume.profile.TryGet(out whiteBalance)) {
-			whiteBalance.temperature.value = Mathf.Lerp(whiteBalance.temperature.value, targetIntensities[2], lerpSpeed);
-			whiteBalance.tint.value = Mathf.Lerp(whiteBalance.tint.value, targetIntensities[3], lerpSpeed);
-
-		}
+		Resume();
+		PostProcess();
 	}
 
 	#region PlayerMovement
@@ -113,6 +84,42 @@ public class PlayerScript : MonoBehaviour{
 			resumeCanvas.SetActive(true);
 			Time.timeScale = 0f;
 			loseLevel = true;
+		}
+	}
+	#endregion
+
+	#region Other
+	private void Resume() {
+		if (Input.GetKeyDown(KeyCode.Escape) && !esc) {
+			resumeCanvas.SetActive(true);
+			staminaScript.staminaCanvas.SetActive(false);
+			Time.timeScale = 0f;
+			esc = true;
+		} else if (Input.GetKeyDown(KeyCode.Escape) && esc) {
+			resumeCanvas.SetActive(false);
+			staminaScript.staminaCanvas.SetActive(true);
+			Time.timeScale = 1f;
+			esc = false;
+		}
+	}
+	private void PostProcess() {
+		Volume volume = slowMoPost.GetComponent<Volume>();
+		float[] targetIntensities = new float[4];
+		targetIntensities[0] = slowMotion ? 0.4f : 0f;
+		targetIntensities[1] = slowMotion ? 0.25f : 0f;
+		targetIntensities[2] = slowMotion ? -30 : 0f;
+		targetIntensities[3] = slowMotion ? 20f : 0f;
+		float lerpSpeed = 5f * Time.deltaTime;
+
+		if (volume.profile.TryGet(out chromatic))
+			chromatic.intensity.value = Mathf.Lerp(chromatic.intensity.value, targetIntensities[0], lerpSpeed);
+
+		if (volume.profile.TryGet(out lensDistortion))
+			lensDistortion.intensity.value = Mathf.Lerp(lensDistortion.intensity.value, targetIntensities[1], lerpSpeed);
+
+		if (volume.profile.TryGet(out whiteBalance)) {
+			whiteBalance.temperature.value = Mathf.Lerp(whiteBalance.temperature.value, targetIntensities[2], lerpSpeed);
+			whiteBalance.tint.value = Mathf.Lerp(whiteBalance.tint.value, targetIntensities[3], lerpSpeed);
 		}
 	}
 	#endregion

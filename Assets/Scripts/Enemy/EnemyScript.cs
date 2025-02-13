@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour {
@@ -16,16 +17,18 @@ public class EnemyScript : MonoBehaviour {
 	private float lastShootTime;
 	private Rigidbody2D rb;
 	private GameObject gunHolding;
+	private CinemachineImpulseSource impulseSource;
 
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	void Start() {
 		gunHolding = Instantiate(gunHoldingPrefab);
 		gunHolding.transform.SetParent(gunHoldParent);
 		gunHolding.transform.localPosition = Vector3.zero;
+		gunHolding.GetComponent<GunsScript>().gunHolder = GunsScript.GunHolder.enemy;
 
 		gunHolding.GetComponent<GunsScript>().bulletPrefab = bulletPrefab;
-
 		rb = GetComponent<Rigidbody2D>();
+		impulseSource = GetComponent<CinemachineImpulseSource>();
 
 		GameObject.Find("UIMannge").GetComponent<GameManngeScript>().AddEnemy();
 	}
@@ -52,6 +55,8 @@ public class EnemyScript : MonoBehaviour {
 
 	private void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.CompareTag("PlayerBullet")) {
+			CameraShakeManager.instance.CameraShake(impulseSource);
+			FindFirstObjectByType<AudioManager>().Play("GunShoot");
 			StaminaScript staminaScript = player.GetComponent<StaminaScript>();
 			GameObject.Find("UIMannge").GetComponent<GameManngeScript>().RemoveEnemy();
 			if (staminaScript) {

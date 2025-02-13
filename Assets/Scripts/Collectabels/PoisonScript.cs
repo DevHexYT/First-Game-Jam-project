@@ -12,6 +12,7 @@ public class PoisonScript : CollectableScript {
 	}
 
 	public void gainStamina() {
+		FindFirstObjectByType<AudioManager>().Play("PoisonDrink");
 		staminaScript.curStamina = 100;
 		staminaScript.SetValue(staminaScript.curStamina);
 		collected = false;
