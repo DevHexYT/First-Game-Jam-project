@@ -16,6 +16,7 @@ public class AudioManager : MonoBehaviour {
 			s.source.spatialBlend = s.blend;
 			s.source.maxDistance = s.maxDistance;
 			s.source.minDistance = s.minDistance;
+			s.source.rolloffMode = s.rolloffMode;
 		}
 	}
 

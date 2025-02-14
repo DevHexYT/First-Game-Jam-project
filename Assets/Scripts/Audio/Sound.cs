@@ -14,6 +14,7 @@ public class Sound {
 	[Range(0f, 1f)] public float blend;
 	[Range(0f, 15f)] public float maxDistance;
 	[Range(0f, 15f)] public float minDistance;
+	public AudioRolloffMode rolloffMode;
 
 	[HideInInspector] public AudioSource source;
 }

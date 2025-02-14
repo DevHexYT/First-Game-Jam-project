@@ -9,8 +9,9 @@ public class GunsScript : CollectableScript {
 	public float maxPitch;
 	public float minPitch;
 	public GameObject bulletPrefab;
-
 	public GunHolder gunHolder;
+
+	[SerializeField] private float maxRange;
 	private float fireTime;
 	private CinemachineImpulseSource impulseSource;
 
@@ -27,6 +28,8 @@ public class GunsScript : CollectableScript {
 
 		Vector2 shootDirection = firePoint.right;
 		rb.AddForce(shootDirection * fireSpeed, ForceMode2D.Impulse);
+		BulletScript bulletScript = bullet.GetComponent<BulletScript>();
+		bulletScript.maxRange = maxRange;
 	}
 
 	private void Start() {

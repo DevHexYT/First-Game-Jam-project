@@ -142,12 +142,13 @@ MonoBehaviour:
   canCollect: 0
   collected: 0
   firePoint: {fileID: 0}
-  fireRate: 15
+  fireRate: 9
   fireSpeed: 15
   maxPitch: 2.5
   minPitch: 0.9
   bulletPrefab: {fileID: 161372666170402849, guid: 33ddf5306c620fd4b843a25ee3639796, type: 3}
   gunHolder: 0
+  maxRange: 6.69
 --- !u!114 &-46569113208032614
 MonoBehaviour:
   m_ObjectHideFlags: 0

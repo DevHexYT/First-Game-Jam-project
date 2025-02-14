@@ -66,7 +66,7 @@ public class EnemyScript : MonoBehaviour {
 			Destroy(gameObject);
 			ParticleSystem newDeathParticle = Instantiate(deathParticle, transform.position, transform.rotation);
 			newDeathParticle.Play();
-			Destroy(newDeathParticle,1.5f);
+			Destroy(newDeathParticle.gameObject,1.5f);
 			Destroy(other.gameObject);
 			Debug.Log(GameObject.Find("UIMannge").GetComponent<GameManngeScript>().enemysCount);
 		}

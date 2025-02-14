@@ -1,4 +1,6 @@
 using System;
+using Unity.Mathematics;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -42,7 +44,7 @@ public class PlayerScript : MonoBehaviour{
 	private void PlayerMovement(Rigidbody2D rb, GameObject collect, float speed) {
 		float inputX = Input.GetAxisRaw("Horizontal");
 		float inputY = Input.GetAxisRaw("Vertical");
-
+        
 		Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		Vector2 dir = mousePos - rb.position;
 		float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
@@ -109,7 +111,7 @@ public class PlayerScript : MonoBehaviour{
 		targetIntensities[1] = slowMotion ? 0.25f : 0f;
 		targetIntensities[2] = slowMotion ? -30 : 0f;
 		targetIntensities[3] = slowMotion ? 20f : 0f;
-		float lerpSpeed = 5f * Time.deltaTime;
+		float lerpSpeed = 1f - Mathf.Exp(-5f * Time.deltaTime);
 
 		if (volume.profile.TryGet(out chromatic))
 			chromatic.intensity.value = Mathf.Lerp(chromatic.intensity.value, targetIntensities[0], lerpSpeed);

@@ -293,6 +293,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239ceff983bbd444fbec15a47262652f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxRange: 0
+  startPos: {x: 0, y: 0}
+  particlePrefab: {fileID: 5921574687012572001, guid: 064032938f461cc43a6381976d072c98, type: 3}
 --- !u!114 &937993522135429683
 MonoBehaviour:
   m_ObjectHideFlags: 0
