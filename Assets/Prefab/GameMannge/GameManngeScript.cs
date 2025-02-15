@@ -11,6 +11,7 @@ public class GameManngeScript : MonoBehaviour {
 	private void Awake() {
 		winCanvas = transform.Find("Win").gameObject;
 		staminaCanvas = transform.Find("Stamina Canvas").gameObject;
+		staminaCanvas.SetActive(true);
 	}
 
 	private void Update() {

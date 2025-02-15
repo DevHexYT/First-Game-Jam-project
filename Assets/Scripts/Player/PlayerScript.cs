@@ -20,6 +20,7 @@ public class PlayerScript : MonoBehaviour{
 	public GameObject slowMoPost;
 	public GameObject resumeCanvas;
 	
+	private Transform staminaBarPos;
 	private ChromaticAberration chromatic;
 	private LensDistortion lensDistortion;
 	private WhiteBalance whiteBalance;
@@ -29,6 +30,7 @@ public class PlayerScript : MonoBehaviour{
 		FindFirstObjectByType<AudioManager>().Play("Theme");
 		staminaScript = GetComponent<StaminaScript>();
 		rb = GetComponent<Rigidbody2D>();
+		staminaBarPos = transform.Find("StaminaBarPosistion");
 	}
 
 	// Update is called once per frame
@@ -38,6 +40,7 @@ public class PlayerScript : MonoBehaviour{
 		StaminaBarHandle(slowMotion, ref staminaScript.curStamina, 50f);
 		Resume();
 		PostProcess();
+		staminaScript.SetBarPosition(staminaBarPos.position,staminaBarPos.rotation);
 	}
 
 	#region PlayerMovement
