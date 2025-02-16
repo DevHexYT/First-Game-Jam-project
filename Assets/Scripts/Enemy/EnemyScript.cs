@@ -35,6 +35,8 @@ public class EnemyScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
+		if (player == null)
+			player = GameObject.Find("Player").transform;
 		if (Vector2.Distance(transform.position, player.position) <= shootRange) {
 
 			Vector2 dir = player.position - transform.position;

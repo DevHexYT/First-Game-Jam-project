@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class UIBarsScript : MonoBehaviour{
 
-	public Slider slider;
+	[HideInInspector] public Slider slider;
 
 	public void SetMaxValue(float maxValue,float startingValue) {
 		slider.maxValue = maxValue;

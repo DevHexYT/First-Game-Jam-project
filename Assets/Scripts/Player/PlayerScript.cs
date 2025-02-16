@@ -1,6 +1,4 @@
 using System;
-using Unity.Mathematics;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -40,6 +38,7 @@ public class PlayerScript : MonoBehaviour{
 		StaminaBarHandle(slowMotion, ref staminaScript.curStamina, 50f);
 		Resume();
 		PostProcess();
+		if (staminaScript.staminaCanvas != null)
 		staminaScript.SetBarPosition(staminaBarPos.position,staminaBarPos.rotation);
 	}
 
@@ -63,10 +62,10 @@ public class PlayerScript : MonoBehaviour{
 	#region PlayerAbillty
 
 	public void SlowmotionEffect(float timeScale,ref bool slowMotion,float curStamina) {
-		if (Input.GetKeyDown(KeyCode.Tab) && !slowMotion && curStamina > 0 && !esc && !loseLevel) {
+		if (Input.GetKeyDown(KeyCode.Q) && !slowMotion && curStamina > 0 && !esc && !loseLevel) {
 			Time.timeScale = timeScale;
 			slowMotion = true;
-		} else if (Input.GetKeyDown(KeyCode.Tab) && slowMotion || curStamina <= 0 && !esc && !loseLevel) {
+		} else if (Input.GetKeyDown(KeyCode.Q) && slowMotion || curStamina <= 0 && !esc && !loseLevel) {
 			Time.timeScale = 1f;
 			slowMotion = false;
 		} else if (slowMotion && !loseLevel) Time.timeScale = timeScale; else return;
@@ -95,6 +94,8 @@ public class PlayerScript : MonoBehaviour{
 
 	#region Other
 	private void Resume() {
+		if (resumeCanvas == null)
+			resumeCanvas = GameObject.Find("UIMannge").transform.Find("ResumeCanvas").gameObject;
 		if (Input.GetKeyDown(KeyCode.Escape) && !esc) {
 			resumeCanvas.SetActive(true);
 			staminaScript.staminaCanvas.SetActive(false);
@@ -108,6 +109,8 @@ public class PlayerScript : MonoBehaviour{
 		}
 	}
 	private void PostProcess() {
+		if (slowMoPost == null)
+			slowMoPost = GameObject.Find("PostProcessing").transform.Find("SlowMoPost").gameObject;
 		Volume volume = slowMoPost.GetComponent<Volume>();
 		float[] targetIntensities = new float[4];
 		targetIntensities[0] = slowMotion ? 0.4f : 0f;

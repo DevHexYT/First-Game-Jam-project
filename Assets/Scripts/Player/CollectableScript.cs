@@ -24,6 +24,11 @@ public class CollectableScript : MonoBehaviour {
 
 	private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
 		ResetCollectionState();
+		Debug.Log("Reset");
+	}
+
+	private void Awake() {
+		ResetCollectionState();
 	}
 
 	public void CheckClosestCollectable() {
@@ -49,6 +54,7 @@ public class CollectableScript : MonoBehaviour {
 	public void HandleCollectionInput() {
 		if (closestCollectable == this && Input.GetKeyDown(KeyCode.E)) {
 			if (!collected && !isItemCollected) {
+				FindFirstObjectByType<AudioManager>().Play("Collect");
 				collected = true;
 				isItemCollected = true;
 			} else if (collected) {

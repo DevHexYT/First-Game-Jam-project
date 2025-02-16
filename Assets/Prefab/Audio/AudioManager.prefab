@@ -52,6 +52,7 @@ MonoBehaviour:
     blend: 0.5
     maxDistance: 6
     minDistance: 0
+    rolloffMode: 0
     source: {fileID: 0}
   - name: EnemyDeath
     clip: {fileID: 8300000, guid: 3cd2842d492b5a942a73c323c6502fb9, type: 3}
@@ -60,6 +61,7 @@ MonoBehaviour:
     blend: 0.5
     maxDistance: 4
     minDistance: 1
+    rolloffMode: 0
     source: {fileID: 0}
   - name: PoisonDrink
     clip: {fileID: 8300000, guid: a11b3aab857ef1041abcfc05de94e72d, type: 3}
@@ -68,6 +70,7 @@ MonoBehaviour:
     blend: 0
     maxDistance: 0
     minDistance: 0
+    rolloffMode: 0
     source: {fileID: 0}
   - name: Theme
     clip: {fileID: 8300000, guid: 5488386eb59c732419a15e8859c32a90, type: 3}
@@ -76,4 +79,14 @@ MonoBehaviour:
     blend: 0
     maxDistance: 0
     minDistance: 0
+    rolloffMode: 0
+    source: {fileID: 0}
+  - name: Collect
+    clip: {fileID: 8300000, guid: af52829559847b44e8d33a36077c3d3a, type: 3}
+    volume: 0.5
+    pitch: 1
+    blend: 0
+    maxDistance: 0
+    minDistance: 0
+    rolloffMode: 0
     source: {fileID: 0}
