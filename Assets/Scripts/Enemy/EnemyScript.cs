@@ -12,7 +12,8 @@ public class EnemyScript : MonoBehaviour {
 	[SerializeField] private GameObject bulletPrefab;
 	[SerializeField] private float shootCooldown = 1.5f;
 	[SerializeField] private float shootRange = 10f;
-	[SerializeField] private float angleTolerance = 10f; 
+	[SerializeField] private float angleTolerance = 10f;
+	[SerializeField] private Vector3 offset;
 
 	private float lastShootTime;
 	private Rigidbody2D rb;
@@ -37,6 +38,12 @@ public class EnemyScript : MonoBehaviour {
 	void Update() {
 		if (player == null)
 			player = GameObject.Find("Player").transform;
+
+		Vector2 direction = (player.position - (transform.position + offset)).normalized;
+		RaycastHit2D hit2D = Physics2D.Raycast(transform.position + offset, direction, distance);
+
+		Debug.DrawRay(transform.position + offset, direction * distance, Color.red);
+
 		if (Vector2.Distance(transform.position, player.position) <= shootRange) {
 
 			Vector2 dir = player.position - transform.position;
@@ -48,13 +55,14 @@ public class EnemyScript : MonoBehaviour {
 				float angleDifference = Mathf.Abs(Mathf.DeltaAngle(rb.rotation, targetAngle));
 
 				if (angleDifference <= angleTolerance) {
-					gunHolding.GetComponent<GunsScript>().Shoot();
-					lastShootTime = Time.time;
+					if(hit2D.collider.gameObject.CompareTag("Player")) {
+						gunHolding.GetComponent<GunsScript>().Shoot();
+						lastShootTime = Time.time;
+					}
 				}
 			}
 		}
 	}
-
 	private void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.CompareTag("PlayerBullet")) {
 			CameraShakeManager.instance.CameraShake(impulseSource);

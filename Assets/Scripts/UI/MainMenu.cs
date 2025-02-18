@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviour
 	public void OpenMainMenu() {
 		SceneManager.LoadScene("MainMenu");
 	}
-	public void openYotube() {
-		Application.OpenURL("https://www.youtube.com/channel/UCSNuaK__OLStXBZ0PL9lBbg");
+	public void openYotube(string url) {
+		Application.OpenURL(url);
 	}
 }
