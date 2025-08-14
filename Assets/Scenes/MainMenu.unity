@@ -153,8 +153,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -602, y: -328}
-  m_SizeDelta: {x: 700, y: 115}
+  m_AnchoredPosition: {x: -570.85, y: -352.81}
+  m_SizeDelta: {x: 778.2949, y: 82.3769}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &25131457
 MonoBehaviour:
@@ -176,9 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Click the YouTube logo to visit my channel!
-
-'
+  m_text: Visit My Channel DevHex!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0d57a4b95dfbb1e448a623c46fdb94cd, type: 2}
   m_sharedMaterial: {fileID: -4510945221007292782, guid: 0d57a4b95dfbb1e448a623c46fdb94cd, type: 2}
@@ -205,10 +203,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
+  m_fontSize: 62.35
   m_fontSizeBase: 50
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -573,8 +571,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 16.333, y: 350}
-  m_SizeDelta: {x: 536.6667, y: 345}
+  m_AnchoredPosition: {x: 14.667, y: 301}
+  m_SizeDelta: {x: 533.3334, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &583095391
 MonoBehaviour:
@@ -652,7 +650,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 7990325093500799613, guid: 92d88ef3bf6984746afe3aa454518e62, type: 3}
+  m_Sprite: {fileID: 5343036499534294710, guid: 761545e94ccdd4f43a8cd58c782705f6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
